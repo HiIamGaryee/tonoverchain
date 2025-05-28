@@ -1,0 +1,17 @@
+const pages = [
+  // User Pages
+  "LandingPage",
+  "AuthPage",
+  "Dashboard",
+  "ExploreShops",
+  "ShopDetail",
+  "SmartContractSplit",
+  "ProfileSettings",
+
+  // 🏪 Merchant Pages
+  "MerchantLogin",
+  "MerchantDashboard",
+  "PostAdsPage",
+  "MyShopPage",
+  "CreateShopPage",
+];
