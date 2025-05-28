@@ -12,6 +12,8 @@ import {
   Button,
 } from "@mui/material";
 import MerchantSidebar from "../../components/MerchantSidebar";
+import Banner from "../../assets/banner5.png";
+import DefaultShop from "../../assets/shop1.jpg";
 
 const metrics = { progress: 75, totalAds: 12, activeRewards: 4 } as const;
 const tasks = [
@@ -43,15 +45,14 @@ const MerchantDashboardPage = () => (
           bgcolor: "#1e293b",
           width: "100%",
           height: "auto",
-          aspectRatio: 16 / 9,
         }}
       >
         <CardContent sx={{ display: "flex", gap: 3, flexWrap: "wrap" }}>
           <Box
             component="img"
-            src="https://via.placeholder.com/300x320.png?text=Your+Shop+Image"
+            src={DefaultShop}
             alt="Shop preview"
-            sx={{ width: 280, borderRadius: 2 }}
+            sx={{ width: 280, borderRadius: 2, aspectRatio: "1/1" }}
           />
 
           <Box flex={1} minWidth={240}>
@@ -65,6 +66,20 @@ const MerchantDashboardPage = () => (
           </Box>
         </CardContent>
       </Card>
+
+      <Box
+        component="img"
+        src={Banner}
+        alt="Banner"
+        sx={{
+          width: { xs: "100%" },
+          borderRadius: 3,
+          boxShadow: 3,
+          aspectRatio: 16 / 6,
+          objectFit: "cover",
+          objectPosition: "bottom",
+        }}
+      />
     </Box>
 
     {/* Right column */}

@@ -12,6 +12,7 @@ import {
   AccordionDetails,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import HomeImg from "../assets/home1.png";
 
 /* ─── static data ────────────────────────────────────────────── */
 const heroStats = [
@@ -114,7 +115,6 @@ const HomePage = () => (
         </Stack>
       </Grid>
 
-      {/* hero image */}
       <Grid
         size={{
           xs: 12,
@@ -122,10 +122,9 @@ const HomePage = () => (
         }}
         textAlign="center"
       >
-        {/* placeholder — replace src with your own */}
         <Box
           component="img"
-          src="https://via.placeholder.com/420x480.png?text=Couple+VR+Image"
+          src={HomeImg}
           alt="Couple in VR"
           sx={{
             width: { xs: "100%", md: 420 },
@@ -136,7 +135,6 @@ const HomePage = () => (
       </Grid>
     </Grid>
 
-    {/* services */}
     <Box textAlign="center" mt={{ xs: 10, md: 14 }} px={2}>
       <Typography
         variant="overline"

@@ -136,7 +136,7 @@ const getTheme = (mode: any) =>
               background: "#C0006A",
             },
             "&:focus": {
-              background: "#0052FF",
+              background: "#C0006A",
             },
           },
           outlined: {
@@ -154,8 +154,8 @@ const getTheme = (mode: any) =>
             },
             "&:focus": {
               background: "transparent",
-              border: "1px solid #0052FF",
-              color: "#0052FF",
+              border: "1px solid #C0006A",
+              color: "#C0006A",
             },
           },
           text: {
