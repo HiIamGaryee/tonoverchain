@@ -8,6 +8,7 @@ import DashboardPage from "./pages/DashboardPage";
 import ExploreShopsPage from "./pages/ExploreShopsPage";
 import MerchantProfileSettingPage from "./pages/Merchant/MerchantProfileSettingPage";
 import MerchantDashboardPage from "./pages/Merchant/MerchantDashboardPage";
+import ThemeToggle from "./components/ThemeToggle";
 
 // import ErrorPage from "./pages/ErrorPage";
 
@@ -15,6 +16,7 @@ import MerchantDashboardPage from "./pages/Merchant/MerchantDashboardPage";
 const LayoutLayer = () => {
   return (
     <>
+      <ThemeToggle />
       <Outlet />
     </>
   );

@@ -1,27 +1,52 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
 import getTheme from "../theme";
 import { Theme } from "@mui/material/styles";
 
+const THEME_MODE_KEY = "themeMode";
+
 const useMode = () => {
+  // Initialize mode from localStorage or default to light
   const [mode, setMode] = useState<"light" | "dark">(() => {
-    const savedMode = localStorage.getItem("themeMode");
-    return savedMode ? (savedMode as "light" | "dark") : "light";
+    if (typeof window !== "undefined") {
+      const savedMode = localStorage.getItem(THEME_MODE_KEY);
+      return savedMode === "dark" ? "dark" : "light";
+    }
+    return "light";
   });
 
-  const toggleMode = () => {
-    setMode((prevMode) => {
-      const newMode = prevMode === "light" ? "dark" : "light";
-      localStorage.setItem("themeMode", newMode);
-      return newMode;
-    });
-  };
-
+  // Memoize the theme to prevent unnecessary recalculations
   const theme: Theme = useMemo(() => getTheme(mode), [mode]);
 
-  // Add useEffect to apply the theme mode immediately when changed
+  // Toggle mode function with proper state and localStorage updates
+  const toggleMode = useCallback(() => {
+    setMode((prevMode) => {
+      const newMode = prevMode === "light" ? "dark" : "light";
+      localStorage.setItem(THEME_MODE_KEY, newMode);
+      return newMode;
+    });
+  }, []);
+
+  // Effect to handle initial theme and system preference
   useEffect(() => {
-    const rootElement = document.documentElement;
-    rootElement.setAttribute("data-theme", mode);
+    // Set initial theme
+    document.documentElement.setAttribute("data-theme", mode);
+
+    // Listen for system theme changes
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = (e: MediaQueryListEvent) => {
+      const newMode = e.matches ? "dark" : "light";
+      setMode(newMode);
+      localStorage.setItem(THEME_MODE_KEY, newMode);
+    };
+
+    // Only add listener if user hasn't set a preference
+    if (!localStorage.getItem(THEME_MODE_KEY)) {
+      mediaQuery.addEventListener("change", handleChange);
+    }
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleChange);
+    };
   }, [mode]);
 
   return { theme, mode, toggleMode };

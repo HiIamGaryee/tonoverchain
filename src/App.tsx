@@ -12,12 +12,17 @@ import useMode from "./hooks/useMode";
 const queryClient = new QueryClient();
 
 function App() {
-  const { theme } = useMode();
+  const { theme, mode } = useMode();
+
+  // Force a re-render when mode changes
+  React.useEffect(() => {
+    document.documentElement.setAttribute("data-theme", mode);
+  }, [mode]);
 
   return (
     <ThemeProvider theme={theme}>
       {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
-      <CssBaseline />
+      <CssBaseline enableColorScheme />
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <RouterProvider router={router} />

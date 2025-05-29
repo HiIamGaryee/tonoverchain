@@ -24,8 +24,12 @@ const getTheme = (mode: any) =>
   createTheme({
     palette: {
       mode,
+      text: {
+        primary: mode === "light" ? "#000000" : "#ffffff",
+        secondary: mode === "light" ? "#666666" : "#cccccc",
+      },
       background: {
-        default: mode === "light" ? "#ffffff" : "#000000",
+        default: mode === "light" ? "#ffffff" : "#0d0c11",
         paper: mode === "light" ? "#f5f5f5" : "#121212",
       },
       primary: {
@@ -40,7 +44,7 @@ const getTheme = (mode: any) =>
         dark: "#444",
         contrastText: "#ffffff",
       },
-      light: { main: "#ffffff", light: "#F5F3EF", dark: "#e0e0e0" },
+      light: { main: "#f3f0f4", light: "#F5F3EF", dark: "#e0e0e0" },
       dark: { main: "#000000", light: "#514c4b", dark: "#212121" },
       error: {
         main: "#f44336", // Red for errors
@@ -73,6 +77,9 @@ const getTheme = (mode: any) =>
       h6: { fontFamily: albertFont, fontSize: 16 },
       subtitle1: { fontFamily: albertFont },
       button: { fontFamily: nunitoFont },
+      allVariants: {
+        color: mode === "light" ? "#000000" : "#ffffff",
+      },
     },
     components: {
       MuiPaper: {
@@ -231,45 +238,35 @@ const getTheme = (mode: any) =>
           fullWidth: true,
         },
         styleOverrides: {
-          root: {
+          root: ({ theme }) => ({
             padding: 0,
             borderRadius: "20px",
-            backgroundColor: "#fff",
-            "&.white-input": {
-              backgroundColor: "#fff",
-              "& .MuiOutlinedInput-root": {
-                backgroundColor: "#fff",
-              },
-            },
-            // "& .MuiFormHelperText-root": {
-            //   display: "none",
-            // },
-
-            "&.Mui-error .MuiFormHelperText-root": {
-              display: "block",
-              margin: 0,
-              fontSize: "0.75rem",
-              color: "#f44336",
-              backgroundColor: "transparent",
+            backgroundColor:
+              theme.palette.mode === "light"
+                ? "#fff"
+                : theme.palette.background.paper,
+            "& .MuiInputLabel-root": {
+              color: theme.palette.mode === "light" ? "#000000" : "#ffffff",
             },
             "& .MuiOutlinedInput-root": {
-              borderRadius: "20px",
-              backgroundColor: "#fff",
-              border: "1px solid divider",
+              color: theme.palette.mode === "light" ? "#000000" : "#ffffff",
+              backgroundColor:
+                theme.palette.mode === "light"
+                  ? "#fff"
+                  : theme.palette.background.paper,
               "& fieldset": {
-                borderColor: "none",
+                borderColor:
+                  theme.palette.mode === "light" ? "#bdbdbd" : "#444",
               },
               "&:hover fieldset": {
-                borderColor: "none",
+                borderColor:
+                  theme.palette.mode === "light" ? "#000000" : "#ffffff",
               },
               "&.Mui-focused fieldset": {
                 borderColor: "#E5007D",
               },
-              "&.Mui-error fieldset": {
-                borderColor: "#f44336",
-              },
             },
-          },
+          }),
         },
       },
       MuiFilledInput: {
@@ -308,10 +305,13 @@ const getTheme = (mode: any) =>
       MuiTypography: {
         styleOverrides: {
           root: {
-            color: "#000000", // default for all variants
+            color: "inherit",
           },
           caption: ({ theme }) => ({
-            color: theme.palette.grey[600],
+            color:
+              theme.palette.mode === "light"
+                ? theme.palette.grey[600]
+                : theme.palette.grey[400],
             borderColor: theme.palette.divider,
           }),
         },

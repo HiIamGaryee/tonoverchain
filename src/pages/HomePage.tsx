@@ -14,7 +14,6 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import HomeImg from "../assets/home1.png";
 
-/* ─── static data ────────────────────────────────────────────── */
 const heroStats = [
   { label: "Couple users", value: "47+" },
   { label: "Rewards earned", value: "200+" },
@@ -53,9 +52,9 @@ const faqs = [
   },
 ] as const;
 
-/* ─── component ──────────────────────────────────────────────── */
 const HomePage = () => (
-  <Box sx={{ bgcolor: "#0d0c11", color: "#f3f0f4", pb: 10 }}>
+  // <Box sx={{ bgcolor: "#0d0c11", color: "#f3f0f4", pb: 10 }}>
+  <Box sx={{ bgcolor: "background.default", color: "#f3f0f4", pb: 10 }}>
     {/* hero */}
     <Grid
       container
