@@ -1,4 +1,3 @@
-// components/MerchantSidebar.tsx
 import {
   Drawer,
   List,
@@ -15,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 
 const links = [
   { label: "Dashboard", icon: <DashboardIcon />, link: "/merchant/dashboard" },
-  { label: "Ads", icon: <ImageIcon />, link: "/merchant/ads" },
+  { label: "Ads", icon: <StarsIcon />, link: "/merchant/ads" },
   { label: "Edit My Store", icon: <ImageIcon />, link: "/merchant/profile" },
 ] as const;
 

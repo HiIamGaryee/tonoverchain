@@ -1,4 +1,3 @@
-// pages/ExploreShops.tsx
 import {
   Box,
   Typography,
@@ -8,7 +7,20 @@ import {
   CardMedia,
   CardContent,
   Rating,
+  useTheme,
+  keyframes,
 } from "@mui/material";
+
+const glowIn = keyframes`
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
 
 interface Shop {
   id: number;
@@ -43,25 +55,80 @@ const shops: Shop[] = [
 ];
 
 const ExploreShopsPage = () => {
+  const theme = useTheme();
+
   return (
-    <Box sx={{ p: 2 }}>
-      <Typography variant="h5" gutterBottom>
-        Explore shops
+    <Box sx={{ p: { xs: 2, md: 4 } }}>
+      <Typography
+        variant="h5"
+        fontWeight={700}
+        sx={{
+          color: "primary.main",
+          mb: 4,
+          textTransform: "uppercase",
+          textShadow: `0 0 6px #E5007D`,
+        }}
+      >
+        Explore Shops
       </Typography>
 
       <List disablePadding>
-        {shops.map((shop) => (
-          <ListItem key={shop.id} disableGutters sx={{ mb: 2 }}>
-            <Card sx={{ display: "flex", width: "100%" }}>
+        {shops.map((shop, index) => (
+          <ListItem
+            key={shop.id}
+            disableGutters
+            sx={{
+              mb: 3,
+              animation: `${glowIn} 0.5s ease ${index * 0.1}s both`,
+            }}
+          >
+            <Card
+              sx={{
+                display: "flex",
+                width: "100%",
+                borderRadius: 3,
+                overflow: "hidden",
+                bgcolor: "#16131d",
+                boxShadow: `0 0 12px -4px #E5007D`,
+                transition: "all 0.3s ease",
+                "&:hover": {
+                  boxShadow: `0 0 20px 2px #E5007D`,
+                  transform: "scale(1.015)",
+                },
+              }}
+            >
               <CardMedia
                 component="img"
                 image={shop.image}
-                sx={{ width: { xs: 100, sm: 120, md: 140 } }}
+                sx={{
+                  width: { xs: 100, sm: 140 },
+                  objectFit: "cover",
+                  filter: "brightness(1.1)",
+                }}
                 alt={shop.name}
               />
 
-              <CardContent sx={{ flex: 1 }}>
-                <Typography variant="h6">{shop.name}</Typography>
+              <CardContent
+                sx={{
+                  flex: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  px: 3,
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  fontWeight={600}
+                  sx={{
+                    color: "#fff",
+                    mb: 0.5,
+                    textShadow: `0 0 6px #E5007D`,
+                  }}
+                >
+                  {shop.name}
+                </Typography>
+
                 <Rating
                   value={shop.rating}
                   precision={0.1}
@@ -69,7 +136,11 @@ const ExploreShopsPage = () => {
                   size="small"
                   sx={{ mb: 0.5 }}
                 />
-                <Typography variant="body2" color="text.secondary">
+
+                <Typography
+                  variant="caption"
+                  sx={{ color: "rgba(255,255,255,0.6)" }}
+                >
                   {shop.address}
                 </Typography>
               </CardContent>

@@ -7,13 +7,11 @@ import {
   Stack,
   Card,
   CardContent,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
+  keyframes,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import HomeImg from "../assets/home1.png";
 import { useNavigate } from "react-router-dom";
+import FaqSection from "../components/FaqSection";
 
 const heroStats = [
   { label: "Couple users", value: "47+" },
@@ -38,24 +36,18 @@ const services = [
   },
 ] as const;
 
-const faqs = [
-  {
-    q: "How do we earn loyalty points?",
-    a: "Simply pay with a linked wallet at partner stores; points credit instantly.",
-  },
-  {
-    q: "Can we change the split ratio?",
-    a: "Yes, update it any time in Settings — the next bill respects the new share.",
-  },
-  {
-    q: "Is the smart contract audited?",
-    a: "Absolutely. Third-party audits keep our love (and funds) secure.",
-  },
-] as const;
-
 const HomePage = () => {
   const navigate = useNavigate();
-
+  const fadeInUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
   return (
     <Box sx={{ bgcolor: "background.default", color: "#f3f0f4", pb: 10 }}>
       {/* hero */}
@@ -168,14 +160,15 @@ const HomePage = () => {
           maxWidth={1200}
           mx="auto"
         >
-          {services.map(({ icon, title, desc }) => (
+          {services.map(({ icon, title, desc }, idx) => (
             <Grid
-              size={{
-                xs: 12,
-                sm: 6,
-                md: 4,
-              }}
+              size={{ xs: 12, sm: 6, md: 4 }}
               key={title}
+              sx={{
+                animation: `${fadeInUp} 0.6s ease-out`,
+                animationDelay: `${idx * 0.15}s`,
+                animationFillMode: "both",
+              }}
             >
               <Card
                 sx={{
@@ -183,6 +176,11 @@ const HomePage = () => {
                   borderRadius: 3,
                   p: 3,
                   height: "100%",
+                  boxShadow: "0 0 12px transparent",
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    boxShadow: "0 0 20px #E5007D",
+                  },
                 }}
                 elevation={0}
               >
@@ -190,7 +188,7 @@ const HomePage = () => {
                   <Typography fontSize={40} mb={2}>
                     {icon}
                   </Typography>
-                  <Typography variant="h6" fontWeight={600} mb={1}>
+                  <Typography variant="h6" fontWeight={600} mb={1} color="#fff">
                     {title}
                   </Typography>
                   <Typography variant="body2" sx={{ opacity: 0.8 }}>
@@ -203,41 +201,7 @@ const HomePage = () => {
         </Grid>
       </Box>
 
-      {/* FAQ */}
-      <Box mt={{ xs: 12, md: 16 }} px={{ xs: 2, md: 6 }}>
-        <Typography
-          variant="overline"
-          sx={{ color: "primary.main", fontWeight: 700 }}
-        >
-          Need Answers?
-        </Typography>
-        <Typography
-          variant="h4"
-          fontWeight={700}
-          mb={4}
-          sx={{ fontSize: { xs: "2rem", md: "2.8rem" } }}
-        >
-          Frequently Asked Questions
-        </Typography>
-
-        {faqs.map(({ q, a }) => (
-          <Accordion
-            key={q}
-            sx={{
-              bgcolor: "#17151d",
-              mb: 2,
-              "&:before": { display: "none" },
-            }}
-          >
-            <AccordionSummary expandIcon={<ExpandMoreIcon color="primary" />}>
-              <Typography fontWeight={600}>{q}</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography variant="body2">{a}</Typography>
-            </AccordionDetails>
-          </Accordion>
-        ))}
-      </Box>
+      <FaqSection />
     </Box>
   );
 };
