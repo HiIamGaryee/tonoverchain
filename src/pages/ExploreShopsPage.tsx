@@ -10,6 +10,7 @@ import {
   useTheme,
   keyframes,
 } from "@mui/material";
+import MembertSidebar from "../components/MembertSidebar";
 
 const glowIn = keyframes`
   from {
@@ -58,7 +59,14 @@ const ExploreShopsPage = () => {
   const theme = useTheme();
 
   return (
-    <Box sx={{ p: { xs: 2, md: 4 } }}>
+    <Box
+      sx={{
+        display: "flex",
+        bgcolor: "background.default",
+        minHeight: "100vh",
+      }}
+    >
+      <MembertSidebar />
       <Typography
         variant="h5"
         fontWeight={700}
@@ -71,7 +79,6 @@ const ExploreShopsPage = () => {
       >
         Explore Shops
       </Typography>
-
       <List disablePadding>
         {shops.map((shop, index) => (
           <ListItem
