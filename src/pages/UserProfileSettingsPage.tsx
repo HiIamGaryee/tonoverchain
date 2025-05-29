@@ -22,7 +22,7 @@ const fields = [
   { label: "Full name", name: "fullName", value: "Bae" },
   { label: "Email", name: "email", value: "bae@lovechain.dev" },
   { label: "Phone", name: "phone", value: "+1 555-321-0987" },
-  { label: "Date of birth", name: "dob", value: "1995-12-27", type: "date" },
+  { label: "Date of birth", name: "dob", value: "1995-12-27" },
 ] as const;
 
 const UserProfileSettingsPage = () => {
@@ -56,14 +56,14 @@ const UserProfileSettingsPage = () => {
             </Button>
           </Stack>
 
-          {fields.map(({ label, name, value, type = "text" }) => (
+          {fields.map(({ label, name, value }) => (
             <TextField
               key={name}
               fullWidth
               margin="normal"
               label={label}
               defaultValue={value}
-              type={type}
+              // type={type}
             />
           ))}
 
