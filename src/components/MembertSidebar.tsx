@@ -1,4 +1,4 @@
-// components/MerchantSidebar.tsx
+// components/MembertSidebar.tsx
 import {
   Drawer,
   List,
@@ -9,19 +9,20 @@ import {
   Typography,
 } from "@mui/material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import ImageIcon from "@mui/icons-material/Image";
-import StarsIcon from "@mui/icons-material/Stars";
+import PersonIcon from "@mui/icons-material/Person";
+import TravelExploreIcon from "@mui/icons-material/TravelExplore";
+import StorefrontIcon from "@mui/icons-material/Storefront";
 import { useNavigate } from "react-router-dom";
 
 const links = [
-  { label: "Dashboard", icon: <DashboardIcon />, link: "/merchant/dashboard" },
-  { label: "Ads", icon: <ImageIcon />, link: "/merchant/ads" },
-  { label: "Edit My Store", icon: <ImageIcon />, link: "/merchant/profile" },
+  { label: "Dashboard", icon: <DashboardIcon />, link: "/dashboard" },
+  { label: "Profile", icon: <PersonIcon />, link: "/member/profile" },
+  { label: "Explore", icon: <TravelExploreIcon />, link: "/explore" },
+  { label: "Shop", icon: <StorefrontIcon />, link: "/explore/shop" },
 ] as const;
-
 const drawerW = 220;
 
-const MerchantSidebar = () => {
+const MembertSidebar = () => {
   const navigate = useNavigate();
 
   return (
@@ -53,4 +54,5 @@ const MerchantSidebar = () => {
     </Drawer>
   );
 };
-export default MerchantSidebar;
+
+export default MembertSidebar;

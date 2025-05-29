@@ -9,6 +9,9 @@ import ExploreShopsPage from "./pages/ExploreShopsPage";
 import MerchantProfileSettingPage from "./pages/Merchant/MerchantProfileSettingPage";
 import MerchantDashboardPage from "./pages/Merchant/MerchantDashboardPage";
 import ThemeToggle from "./components/ThemeToggle";
+import PostAdPage from "./pages/Merchant/PostAdPage";
+import ShopDetailPage from "./pages/ShopDetailPage";
+import UserProfileSettingsPage from "./pages/UserProfileSettingsPage";
 
 // import ErrorPage from "./pages/ErrorPage";
 
@@ -29,10 +32,17 @@ export const router = createBrowserRouter([
     // errorElement: <ErrorPage />, // Set a default error element here
     children: [
       { path: "/", element: <Home /> },
+
+      // member
       { path: "/dashboard", element: <DashboardPage /> },
       { path: "/explore", element: <ExploreShopsPage /> },
+      { path: "/explore/shop", element: <ShopDetailPage /> },
+      { path: "/member/profile", element: <UserProfileSettingsPage /> },
+
+      // merchant
       { path: "/merchant/profile", element: <MerchantProfileSettingPage /> },
       { path: "/merchant/dashboard", element: <MerchantDashboardPage /> },
+      { path: "/merchant/ads", element: <PostAdPage /> },
 
       {
         path: "/member/profile",
